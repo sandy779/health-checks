@@ -3,6 +3,7 @@ import os
 import sys
 import shutil
 import socket
+import psutil
 
 def reboot_all():
     return os.path.exists("/run/reboot required")
@@ -14,6 +15,9 @@ def check_disk_full(disk,min_gb,min_percent):
     if gigabytes_free<min_gb or percent_free<min_percent:
         return True
     return False
+def check_cpu_usage():
+    usage = psutil.disk_usage(1)
+    return usage<75
 
 
 def check_root_full():
@@ -32,6 +36,7 @@ def main():
     (reboot_all,"Pending reboot"),
     (check_root_full,"Root partition full"),
     (check_no_network,"No network Found"),
+    (check_cpu_usage,"There is enough unused space on cpu"),
     ]
 
     everything_ok=True
