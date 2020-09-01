@@ -2,7 +2,8 @@
 import os
 import sys
 
-
+def reboot_all():
+    return os.path.exist("/run/reboot required")
 
 def main():
     if reboot_all():
