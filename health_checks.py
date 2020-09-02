@@ -4,7 +4,7 @@ import shutil
 import psutil
 def check_disk_usage(disk):
     """Verifies that there is enough free space on disk"""
-    """Verifies that there is enough free space"""
+    
     du = shutil.disk_usage(disk)
     free = du.free / du.total * 100
     return free > 20
